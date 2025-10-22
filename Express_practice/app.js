@@ -1,6 +1,9 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
+
+
 
 app.use((req, res, next) => {
   console.log("First middleware", req.url, req.method);
@@ -29,10 +32,16 @@ app.get('/contact-us', (req, res) => {
     `);
 });
 
+app.use(bodyParser.urlencoded());
+
 app.post('/contact-us', (req, res, next) => {
   console.log("Form submitted", req.method, req.url, req.body);
   res.send("<h1> Thank you for contacting us! </h1>");
 });
+
+
+
+
 
 const port = 3000;
 app.listen(port, () => {
